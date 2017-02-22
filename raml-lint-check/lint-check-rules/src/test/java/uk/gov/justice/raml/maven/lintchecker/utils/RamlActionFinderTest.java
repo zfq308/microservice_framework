@@ -1,10 +1,10 @@
-package uk.gov.justice.services.raml.lintcheck.utils;
+package uk.gov.justice.raml.maven.lintchecker.utils;
 
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static uk.gov.justice.services.raml.lintcheck.utils.RamlActionFinder.actionsFrom;
-import static uk.gov.justice.services.raml.lintcheck.configuration.TestConfiguration.testConfig;
+import static uk.gov.justice.raml.maven.lintchecker.utils.RamlActionFinder.actionsFrom;
+import static uk.gov.justice.raml.maven.lintchecker.configuration.TestConfiguration.testConfig;
 
 import static net.trajano.commons.testing.UtilityClassTestUtil.assertUtilityClassWellDefined;
 

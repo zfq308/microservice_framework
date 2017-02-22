@@ -1,4 +1,4 @@
-package uk.gov.justice.services.raml.lintcheck.configuration;
+package uk.gov.justice.raml.maven.lintchecker.configuration;
 
 import uk.gov.justice.raml.io.files.parser.RamlFileParser;
 
@@ -35,7 +35,7 @@ public class TestConfiguration {
     }
 
     public String basePackage() {
-        return "uk.gov.justice.services.raml.lintcheck.handlers";
+        return "uk.gov.justice.raml.maven.lintchecker.handlers";
     }
 
     public static TestConfiguration testConfig() {

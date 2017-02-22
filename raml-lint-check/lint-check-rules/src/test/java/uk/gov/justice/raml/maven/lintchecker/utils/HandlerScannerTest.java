@@ -1,15 +1,16 @@
-package uk.gov.justice.services.raml.lintcheck.utils;
+package uk.gov.justice.raml.maven.lintchecker.utils;
 
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static uk.gov.justice.services.raml.lintcheck.configuration.TestConfiguration.testConfig;
+import static uk.gov.justice.raml.maven.lintchecker.configuration.TestConfiguration.testConfig;
 
 import java.util.Collection;
 
 import org.junit.Test;
+import org.reflections.util.ClasspathHelper;
 
 
 public class HandlerScannerTest {
@@ -19,7 +20,7 @@ public class HandlerScannerTest {
     public void shouldMatchValidActions() {
 
         final HandlerScanner handlerScanner =
-                new HandlerScanner(testConfig().basePackage());
+                new HandlerScanner(ClasspathHelper.forPackage(testConfig().basePackage()));
 
         final Collection<String> handlesActions = handlerScanner.getHandlesActions();
 

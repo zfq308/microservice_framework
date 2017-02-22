@@ -1,4 +1,4 @@
-package uk.gov.justice.services.raml.lintcheck.it.handlers;
+package uk.gov.justice.raml.maven.lintchecker.it.handlers;
 
 import uk.gov.justice.services.core.annotation.Handles;
 import uk.gov.justice.services.messaging.JsonEnvelope;

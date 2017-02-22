@@ -1,9 +1,9 @@
-package uk.gov.justice.services.raml.lintcheck.it;
+package uk.gov.justice.raml.maven.lintchecker.it;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import uk.gov.justice.raml.maven.lintchecker.LintCheckMojo;
+import uk.gov.justice.raml.maven.lintchecker.rules.LintCheckMojo;
 import uk.gov.justice.raml.maven.test.utils.BetterAbstractMojoTestCase;
 
 import java.io.File;
