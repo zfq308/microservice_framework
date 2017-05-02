@@ -15,6 +15,7 @@ import uk.gov.justice.services.core.handler.registry.HandlerRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
@@ -45,8 +46,8 @@ public class AnnotationScanner implements Extension {
 
     @SuppressWarnings("unused")
     void afterDeploymentValidation(@Observes final AfterDeploymentValidation event, final BeanManager beanManager) {
-        beanManager.getBeans(Object.class, AnyLiteral.create())
-                .forEach(this::processBean);
+        Set<Bean<?>> beans = beanManager.getBeans(Object.class, AnyLiteral.create());
+        beans.forEach(this::processBean);
 
         fireAllCollectedEvents(beanManager);
     }
