@@ -16,7 +16,6 @@ import uk.gov.justice.domain.annotation.Event;
 import uk.gov.justice.services.core.annotation.CustomServiceComponent;
 import uk.gov.justice.services.core.annotation.Direct;
 import uk.gov.justice.services.core.annotation.FrameworkComponent;
-import uk.gov.justice.services.core.annotation.Provider;
 import uk.gov.justice.services.core.annotation.Remote;
 import uk.gov.justice.services.core.annotation.ServiceComponent;
 import uk.gov.justice.services.core.annotation.ServiceComponentLocation;
@@ -118,18 +117,6 @@ public class AnnotationScannerTest {
         verifyIfEventFoundEventFiredWith(processAnnotatedType);
     }
 
-    @Test
-    public void shouldFireProviderFoundEvent() throws Exception {
-        doReturn(TestProvider.class).when(bean).getBeanClass();
-        final ArgumentCaptor<ProviderFoundEvent> captor = ArgumentCaptor.forClass(ProviderFoundEvent.class);
-        mockBeanManagerGetBeansWith(bean);
-
-        annotationScanner.afterDeploymentValidation(afterDeploymentValidation, beanManager);
-
-        verify(beanManager).fireEvent(captor.capture());
-        assertThat(captor.getValue(), instanceOf(ProviderFoundEvent.class));
-        assertThat(captor.getValue().getBean(), equalTo(bean));
-    }
 
     @Test
     public void shouldNotFireAnyEventWithNoHandler() throws Exception {
@@ -226,7 +213,6 @@ public class AnnotationScannerTest {
     public static class TestEvent {
     }
 
-    @Provider
     public static class TestProvider {
 
     }

@@ -9,7 +9,6 @@ import uk.gov.justice.domain.annotation.Event;
 import uk.gov.justice.services.core.annotation.AnyLiteral;
 import uk.gov.justice.services.core.annotation.CustomServiceComponent;
 import uk.gov.justice.services.core.annotation.FrameworkComponent;
-import uk.gov.justice.services.core.annotation.Provider;
 import uk.gov.justice.services.core.annotation.ServiceComponent;
 import uk.gov.justice.services.core.handler.registry.HandlerRegistry;
 
@@ -46,7 +45,7 @@ public class AnnotationScanner implements Extension {
 
     @SuppressWarnings("unused")
     void afterDeploymentValidation(@Observes final AfterDeploymentValidation event, final BeanManager beanManager) {
-        Set<Bean<?>> beans = beanManager.getBeans(Object.class, AnyLiteral.create());
+        final Set<Bean<?>> beans = beanManager.getBeans(Object.class, AnyLiteral.create());
         beans.forEach(this::processBean);
 
         fireAllCollectedEvents(beanManager);
@@ -54,13 +53,10 @@ public class AnnotationScanner implements Extension {
 
     private void processBean(final Bean<?> bean) {
         final Class<?> beanClass = bean.getBeanClass();
-
         if (beanClass.isAnnotationPresent(ServiceComponent.class)
                 || beanClass.isAnnotationPresent(FrameworkComponent.class)
                 || beanClass.isAnnotationPresent(CustomServiceComponent.class)) {
             processServiceComponentsForEvents(bean);
-        } else if (beanClass.isAnnotationPresent(Provider.class)) {
-            processProviderForEvents(bean);
         }
     }
 
@@ -76,10 +72,6 @@ public class AnnotationScanner implements Extension {
         events.add(new ServiceComponentFoundEvent(componentFrom(clazz), bean, componentLocationFrom(clazz)));
     }
 
-    private void processProviderForEvents(final Bean<?> bean) {
-        events.add(new ProviderFoundEvent(bean));
-        LOGGER.info("Identified Access Control Provider {}", bean.getBeanClass().getSimpleName());
-    }
 
     private void fireAllCollectedEvents(final BeanManager beanManager) {
         events.forEach(beanManager::fireEvent);
